@@ -5,6 +5,48 @@
       <div class="search-box">
         <input type="text" class="search-bar" placeholder=" City Search" />
       </div>
+      <div class="row">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Temp</h5>
+          <p class="card-text">Humidity</p>
+          <p class="card-text">Wind</p>
+          <p class="card-text">UV Index</p>
+        </div>
+      </div>
+            <!-- <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Temp</h5>
+          <p class="card-text">Humidity</p>
+          <p class="card-text">Wind</p>
+          <p class="card-text">UV Index</p>
+        </div>
+      </div>
+            <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Temp</h5>
+          <p class="card-text">Humidity</p>
+          <p class="card-text">Wind</p>
+          <p class="card-text">UV Index</p>
+        </div>
+      </div>
+            <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Temp</h5>
+          <p class="card-text">Humidity</p>
+          <p class="card-text">Wind</p>
+          <p class="card-text">UV Index</p>
+        </div>
+      </div>
+            <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Temp</h5>
+          <p class="card-text">Humidity</p>
+          <p class="card-text">Wind</p>
+          <p class="card-text">UV Index</p>
+        </div>
+      </div> -->
+      </div>
     </main>
   </div>
 </template>
@@ -59,12 +101,14 @@
     border: none;
     outline: none;
     background: none;
-    box-shadow: 0px 0px 16px rgba(0,0,0,0.25);
+    box-shadow: 0px 0px 8px rgba(0,0,0,0.25);
     background-color: rgba(255,255,255,0.5);
     border-radius: 0px 16px 0px 16px;
     transition: 0.4s;
   }
   .search-box .search-bar:focus {
+    box-shadow: 0px 0px 16px rgba(0,0,0,0.25);
     background-color: rgba(255,255,255,0.75);
+    border-radius: 16px 0px 16px 0px;
   }
 </style>
