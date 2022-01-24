@@ -13,16 +13,30 @@
           @keypress="fetchWeather" />
       </div>
       <div class="row weather-wrap" v-if ="typeof weather.main != 'undefined'">
+      <!-- Current day forecast card -->
         <div class="card location-box" style="width: 18rem; margin: auto; text-align: center">
           <div class="card-body">
             <h5 class="card-title location">{{ weather.name }}, {{ weather.sys.country }}</h5>
             <p class="card-text date">{{ dateBuilder() }}</p>
             <!-- Able to use img src with v-bind vue directive. -->
             <img id="img" v-bind:src="weather.weather[0].icon" />
+            <!-- Math.round rounds the temp to a whole number -->
             <p class="card-text temp">{{ Math.round(weather.main.temp) }} °F </p>
-            <p class="card-text weather">{{ weather.weather[0].main }} </p>
-            <p class="card-text weather">{{ weather.wind.speed }} MPH Wind </p>
+            <p class="card-text weather">{{ weather.weather[0].description }} </p>
+            <p class="card-text weather"> Wind Speed: {{ weather.wind.speed }} MPH </p>
             <p class="card-text weather"> {{ weather.coord.lat }}, {{ weather.coord.lon }} </p>
+          </div>
+          <!-- 5 day forecast card that will populate from the forecast loop -->
+          <div class="card location-box" style="width: 18rem; margin: auto; text-align: center">
+          <div class="card-body">
+            <p class="card-text date">{{ dateBuilder() }}</p>
+            <!-- Able to use img src with v-bind vue directive. -->
+            <img id="img" v-bind:src="weather.daily[i].weather.icon" />
+            <!-- Math.round rounds the temp to a whole number -->
+            <p class="card-text temp"> Temperature: {{ Math.round(weather.daily[i].temp.day) }} °F </p>
+            <p class="card-text weather">{{ weather.daily[i].weather.description }} </p>
+            <p class="card-text weather"> Wind Speed: {{ weather.daily[i].wind_speed }} MPH </p>
+            <!-- <p class="card-text weather"> {{ weather.coord.lat }}, {{ weather.coord.lon }} </p> -->
           </div>
         </div>
       </div>
@@ -69,7 +83,7 @@
       },
       // fetch5Day (lat, lon) {
       //   // fetch url with url base & api key plus query location
-      //     fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&units=imperial&appid=${this.api_Key}`)
+      //     fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&units=imperial&appid=${this.api_key}`)
       //       .then(res => {
       //         return res.json();
       //       }).then(this.setResults);
