@@ -1,5 +1,6 @@
 <!-- Markup -->
 <template>
+<!-- div ID #app connected to vue below in script section -->
   <div id='app'>
     <main>
       <h1 style = "color: white; text-align: center;"> Vue Weather </h1>
@@ -25,7 +26,8 @@
             <p class="card-text temp"> Temperature: {{ Math.round(weather.main.temp) }} °F </p>
             <p class="card-text weather">{{ weather.weather[0].description }} </p>
             <p class="card-text weather"> Wind Speed: {{ weather.wind.speed }} MPH </p>
-            <!-- Will pass this lat and lon into the fetch5Day fx -->
+            <!-- Will pass this lat and lon into the fetch5Day fx  -->
+            <!-- TO DO: Lat and lon to be deleted from card when both api fetches work -->
             <p class="card-text weather"> {{ weather.coord.lat }}, {{ weather.coord.lon }} </p>
           </div>
           <!-- 5 day forecast card that will populate from the forecast loop -->
@@ -91,12 +93,16 @@
         let year = d.getFullYear();
         return `${day} ${month} ${date}, ${year}`;
       },
+      // TO DO: 
+      // 1. Fetch 5 day forecast w/Lat and Lon from prev api fetch.
+      // 2. Create for loop to iterate over the days (days 1-4) * day[0] is in current forecast card.
+      // 3. Return data.
       // fetch5Day (lat, lon) {
       //   // fetch url with url base & api key plus query location
       //     fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&units=imperial&appid=${this.api_key}`)
       //       .then(res => {
       //         return res.json();
-      //       }).then(this.setResults);
+      //       }).then();
       // }
     }
   }
