@@ -16,7 +16,7 @@
           <div class="card-body">
             <h5 class="card-title location">{{ weather.name }}, {{ weather.sys.country }}</h5>
             <p class="card-text date">{{ dateBuilder() }}</p>
-            <!-- Able to use img src with v-bind vue directive -->
+            <!-- Able to use img src with v-bind vue directive. -->
             <img id="img" v-bind:src="weather.weather[0].icon" />
             <p class="card-text temp">{{ Math.round(weather.main.temp) }} °F </p>
             <p class="card-text weather">{{ weather.weather[0].main }} </p>
