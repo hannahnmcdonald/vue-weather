@@ -4,6 +4,7 @@
     <main>
       <h1 style = "color: white; text-align: center;"> Vue Weather </h1>
       <div class="search-box">
+      <!-- Key press = v-on:keypress and will fire the fetchWeather fx -->
         <input 
           type="text" 
           class="search-bar" 
@@ -20,7 +21,7 @@
             <img id="img" v-bind:src="weather.weather[0].icon" />
             <p class="card-text temp">{{ Math.round(weather.main.temp) }} °F </p>
             <p class="card-text weather">{{ weather.weather[0].main }} </p>
-            <p class="card-text weather">{{ weather.wind.speed }} MPH wind </p>
+            <p class="card-text weather">{{ weather.wind.speed }} MPH Wind </p>
             <p class="card-text weather"> {{ weather.coord.lat }}, {{ weather.coord.lon }} </p>
           </div>
         </div>
@@ -52,15 +53,11 @@
               return res.json();
             }).then(this.setResults);
         }
-        // fetch5Day();
+        // fetch5Day(weather.coord.lat, weather.coord.lon);
       },
       setResults (results) {
         this.weather = results;
-        // this.icon = `http://openweathermap.org/img/wn/${weather.weather.icon}@2x.png`;
       },
-      // setIcon (results) {
-      //   icon = `http://openweathermap.org/img/wn/${weather.weather.icon}@2x.png`;
-      // },
       dateBuilder () {
         let d = new Date();
         let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -69,7 +66,7 @@
         let date = d.getDate();
         let month = months[d.getMonth()];
         let year = d.getFullYear();
-        return `${day} ${date} ${month} ${year}`;
+        return `${day} ${month} ${date}, ${year}`;
       },
       // fetch5Day (lat, lon) {
       //   // fetch url with url base & api key plus query location
@@ -91,8 +88,6 @@
     margin: 0;
     padding: 0;
     box-size: border-box;
-  }
-  body {
     font-family: 'Quicksand', sans-serif;
   }
   #app {
