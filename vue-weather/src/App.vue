@@ -16,9 +16,10 @@
           <div class="card-body">
             <h5 class="card-title location">{{ weather.name }}, {{ weather.sys.country }}</h5>
             <p class="card-text date">{{ dateBuilder() }}</p>
-            <!-- <img id="img"/> -->
+            <!-- <img id="img" {{ weather.icon }} /> -->
             <p class="card-text temp">{{ Math.round(weather.main.temp) }} °F </p>
             <p class="card-text weather">{{ weather.weather[0].main }} </p>
+            <p class="card-text weather"> {{ weather.coord.lat }}, {{ weather.coord.lon }} </p>
           </div>
         </div>
       </div>
@@ -49,6 +50,7 @@
               return res.json();
             }).then(this.setResults);
         }
+        // fetch5Day();
       },
       setResults (results) {
         this.weather = results;
@@ -62,7 +64,14 @@
         let month = months[d.getMonth()];
         let year = d.getFullYear();
         return `${day} ${date} ${month} ${year}`;
-      }
+      },
+      // fetch5Day (lat, lon) {
+      //   // fetch url with url base & api key plus query location
+      //     fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&units=imperial&appid=${this.api_Key}`)
+      //       .then(res => {
+      //         return res.json();
+      //       }).then(this.setResults);
+      // }
     }
   }
 </script>
@@ -117,8 +126,12 @@
     background-color: rgba(255,255,255,0.75);
     border-radius: 16px 0px 16px 0px;
   }
-  .weather-box {
+  .card {
     text-align: center;
+    box-shadow: 0px 0px 8px rgba(0,0,0,0.25) !important;
+    background-color: rgba(255,255,255,0.90) !important;
+    border-radius: 0px 16px 0px 16px !important;
+    transition: 0.4s !important;
   }
   .weather-box .temp {
     display: inline-block;
