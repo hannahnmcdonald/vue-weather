@@ -21,9 +21,10 @@
             <!-- Able to use img src with v-bind vue directive. -->
             <img id="img" v-bind:src="weather.weather[0].icon" />
             <!-- Math.round rounds the temp to a whole number -->
-            <p class="card-text temp">{{ Math.round(weather.main.temp) }} °F </p>
+            <p class="card-text temp"> Temperature: {{ Math.round(weather.main.temp) }} °F </p>
             <p class="card-text weather">{{ weather.weather[0].description }} </p>
             <p class="card-text weather"> Wind Speed: {{ weather.wind.speed }} MPH </p>
+            <!-- Will pass this lat and lon into the fetch5Day fx -->
             <p class="card-text weather"> {{ weather.coord.lat }}, {{ weather.coord.lon }} </p>
           </div>
           <!-- 5 day forecast card that will populate from the forecast loop -->
