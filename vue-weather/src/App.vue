@@ -16,9 +16,11 @@
           <div class="card-body">
             <h5 class="card-title location">{{ weather.name }}, {{ weather.sys.country }}</h5>
             <p class="card-text date">{{ dateBuilder() }}</p>
-            <!-- <img id="img" {{ weather.icon }} /> -->
+            <!-- Able to use img src with v-bind vue directive -->
+            <img id="img" v-bind:src="weather.weather[0].icon" />
             <p class="card-text temp">{{ Math.round(weather.main.temp) }} °F </p>
             <p class="card-text weather">{{ weather.weather[0].main }} </p>
+            <p class="card-text weather">{{ weather.wind.speed }} MPH wind </p>
             <p class="card-text weather"> {{ weather.coord.lat }}, {{ weather.coord.lon }} </p>
           </div>
         </div>
@@ -54,7 +56,11 @@
       },
       setResults (results) {
         this.weather = results;
+        // this.icon = `http://openweathermap.org/img/wn/${weather.weather.icon}@2x.png`;
       },
+      // setIcon (results) {
+      //   icon = `http://openweathermap.org/img/wn/${weather.weather.icon}@2x.png`;
+      // },
       dateBuilder () {
         let d = new Date();
         let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -87,7 +93,7 @@
     box-size: border-box;
   }
   body {
-    font-family: 'Quicksand', sans-serif;;
+    font-family: 'Quicksand', sans-serif;
   }
   #app {
     background-image: url('./assets/bg.jpg');
