@@ -32,7 +32,6 @@
 
 <script>
 // JS Code //
-
   export default {
     name: 'App',
     data () {
