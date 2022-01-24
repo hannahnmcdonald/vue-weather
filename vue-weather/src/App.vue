@@ -2,6 +2,7 @@
 <template>
   <div id='app'>
     <main>
+      <h1 style = "color: white; text-align: center;"> Vue Weather </h1>
       <div class="search-box">
         <input 
           type="text" 
@@ -11,7 +12,7 @@
           @keypress="fetchWeather" />
       </div>
       <div class="row weather-wrap" v-if ="typeof weather.main != 'undefined'">
-        <div class="card location-box" style="width: 18rem;">
+        <div class="card location-box" style="width: 18rem; margin: auto; text-align: center">
           <div class="card-body">
             <h5 class="card-title location">{{ weather.name }}, {{ weather.sys.country }}</h5>
             <p class="card-text date">{{ dateBuilder() }}</p>
@@ -32,7 +33,7 @@
     name: 'App',
     data () {
       return {
-        api_key: process.env.VUE_API_KEY,
+        api_key: 'c6c69e1807c116c6d2751b910241be75',
         url_base: 'https://api.openweathermap.org/data/2.5/',
         query: '',
         weather: {}
@@ -68,13 +69,16 @@
 
 <style>
 /* CSS */
+/* Bring in google fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400&family=Zen+Maru+Gothic:wght@300&display=swap');
+  /* Reg CSS */
   * {
     margin: 0;
     padding: 0;
     box-size: border-box;
   }
   body {
-    font-family: 'monserrat', sans-serif;
+    font-family: 'Quicksand', sans-serif;;
   }
   #app {
     background-image: url('./assets/bg.jpg');
