@@ -12,6 +12,7 @@
           v-model="query"
           @keypress="fetchWeather" />
       </div>
+      <!-- v-if will only display this element (and its children) if the typeof returned is not undefined -->
       <div class="row weather-wrap" v-if ="typeof weather.main != 'undefined'">
       <!-- Current day forecast card -->
         <div class="card location-box" style="width: 18rem; margin: auto; text-align: center">
@@ -48,16 +49,22 @@
 <script>
 // JS Code //
   export default {
+    // "App" ties into our div id #app above in the template. Vue is currently only working with that div and all its children
     name: 'App',
     data () {
       return {
+        // TO DO: Nest this api key in a .env. Still troubleshooting.
         api_key: 'c6c69e1807c116c6d2751b910241be75',
         url_base: 'https://api.openweathermap.org/data/2.5/',
+        // Query (the city search) must be a string
         query: '',
+        // Create the weather object
         weather: {}
       }
     },
+    // FUNCTIONS: //
     methods: {
+      // Fetches the current forecast just for day[0]
       fetchWeather (e) {
         // On key press but ONLY if enter is pressed
         if (e.key == "Enter") {
@@ -65,12 +72,14 @@
           fetch(`${this.url_base}weather?q=${this.query}&units=imperial&APPID=${this.api_key}`)
             .then(res => {
               return res.json();
+              // THEN execute next fx- setResults();
             }).then(this.setResults);
         }
-        // fetch5Day(weather.coord.lat, weather.coord.lon);
       },
+      // Sets the results inside our weather object that we declared above.
       setResults (results) {
         this.weather = results;
+        // TO DO: Execute next fx for fetch5Day() + Bring it lat and lon query values
       },
       dateBuilder () {
         let d = new Date();
