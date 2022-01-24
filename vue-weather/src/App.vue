@@ -13,6 +13,7 @@
           v-model="query"
           @keypress="fetchWeather" />
       </div>
+      <!-- BOOTSTRAP CARD COMPONENTS: -->
       <!-- v-if will only display this element (and its children) if the typeof returned is not undefined -->
       <div class="row weather-wrap" v-if ="typeof weather.main != 'undefined'">
       <!-- Current day forecast card -->
@@ -21,27 +22,27 @@
             <h5 class="card-title location">{{ weather.name }}, {{ weather.sys.country }}</h5>
             <p class="card-text date">{{ dateBuilder() }}</p>
             <!-- Able to use img src with v-bind vue directive. -->
-            <img id="img" v-bind:src="weather.weather[0].icon" />
+            <img id="img" v-bind:src="icon" />
             <!-- Math.round rounds the temp to a whole number -->
-            <p class="card-text temp"> Temperature: {{ Math.round(weather.main.temp) }} °F </p>
             <p class="card-text weather">{{ weather.weather[0].description }} </p>
+            <p class="card-text temp"> Temperature: {{ Math.round(weather.main.temp) }} °F </p>
             <p class="card-text weather"> Wind Speed: {{ weather.wind.speed }} MPH </p>
             <!-- Will pass this lat and lon into the fetch5Day fx  -->
             <!-- TO DO: Lat and lon to be deleted from card when both api fetches work -->
             <p class="card-text weather"> {{ weather.coord.lat }}, {{ weather.coord.lon }} </p>
           </div>
           <!-- 5 day forecast card that will populate from the forecast loop -->
-          <div class="card location-box" style="width: 18rem; margin: auto; text-align: center">
+          <!-- <div class="card location-box" style="width: 18rem; margin: auto; text-align: center">
           <div class="card-body">
-            <p class="card-text date">{{ dateBuilder() }}</p>
+            <p class="card-text date">{{ dateBuilder() }}</p> -->
             <!-- Able to use img src with v-bind vue directive. -->
-            <img id="img" v-bind:src="weather.daily[i].weather.icon" />
+            <!-- <img id="img" v-bind:src="weather.daily[i].weather.icon" /> -->
             <!-- Math.round rounds the temp to a whole number -->
-            <p class="card-text temp"> Temperature: {{ Math.round(weather.daily[i].temp.day) }} °F </p>
+            <!-- <p class="card-text temp"> Temperature: {{ Math.round(weather.daily[i].temp.day) }} °F </p>
             <p class="card-text weather">{{ weather.daily[i].weather.description }} </p>
             <p class="card-text weather"> Wind Speed: {{ weather.daily[i].wind_speed }} MPH </p>
-            <!-- <p class="card-text weather"> {{ weather.coord.lat }}, {{ weather.coord.lon }} </p> -->
-          </div>
+            <p class="card-text weather"> {{ weather.coord.lat }}, {{ weather.coord.lon }} </p> -->
+          <!-- </div> -->
         </div>
       </div>
     </main>
@@ -53,6 +54,8 @@
   export default {
     // "App" ties into our div id #app above in the template. Vue is currently only working with that div and all its children
     name: 'App',
+    // All values below within the data instance become available globally (this.weather or this.query)
+    // Data takes a fx and returns data
     data () {
       return {
         // TO DO: Nest this api key in a .env. Still troubleshooting.
@@ -61,7 +64,8 @@
         // Query (the city search) must be a string
         query: '',
         // Create the weather object
-        weather: {}
+        weather: {},
+        icon: "",
       }
     },
     // FUNCTIONS: //
@@ -75,13 +79,21 @@
             .then(res => {
               return res.json();
               // THEN execute next fx- setResults();
-            }).then(this.setResults);
+            })
+            .then(this.setResults)
+            .then(this.getIcon);
         }
       },
       // Sets the results inside our weather object that we declared above.
       setResults (results) {
         this.weather = results;
+        console.log(this.weather)
         // TO DO: Execute next fx for fetch5Day() + Bring it lat and lon query values
+        // fetch5Day(this.weather.coord.lat, this.weather.coord.lon);
+      },
+      // getIcon Fx retrives weather img from api
+      getIcon() {
+        this.icon = `http://openweathermap.org/img/wn/${this.weather.weather[0].icon}@2x.png`;
       },
       dateBuilder () {
         let d = new Date();
@@ -97,12 +109,19 @@
       // 1. Fetch 5 day forecast w/Lat and Lon from prev api fetch.
       // 2. Create for loop to iterate over the days (days 1-4) * day[0] is in current forecast card.
       // 3. Return data.
-      // fetch5Day (lat, lon) {
+      // fetch5Day () {
       //   // fetch url with url base & api key plus query location
-      //     fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&units=imperial&appid=${this.api_key}`)
+      //     fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${this.weather.coord.lat}&lon=${this.weather.coord.lon}&exclude=minutely,hourly,alerts&units=imperial&appid=${this.api_key}`)
       //       .then(res => {
       //         return res.json();
-      //       }).then();
+      //         // for loop to iterate over api data. Starts at 1 since [0] is the current forecast card.
+      //         for (i = 1; i < weather.daily.length -2 ; i++) {
+
+      //         }
+      //       }).then(this.set5Day);
+      // },
+      // set5Day () {
+
       // }
     }
   }
