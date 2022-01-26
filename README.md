@@ -1,5 +1,5 @@
 # vue-weather
-Simple weather app built with Vue.js to learn the basics of Vue.js
+Simple weather app built with Vue.js to learn the basics.
 
 To Do: 
 
