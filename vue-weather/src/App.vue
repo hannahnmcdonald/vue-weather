@@ -61,7 +61,7 @@
     data () {
       return {
         // TO DO: Nest this api key in a .env. Still troubleshooting.
-        api_key: 'a71dc9b3ddbc17848bd2c6dee1abecb9',
+        api_key: '5d2d4168eee13f741ee979908a0e1265',
         // URL base for both API calls
         url_base: 'https://api.openweathermap.org/data/2.5/',
         // Query (the city search) must be a string
